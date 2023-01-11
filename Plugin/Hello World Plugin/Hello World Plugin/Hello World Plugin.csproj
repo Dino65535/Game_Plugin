@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{84AEAB51-981C-41BE-B7EC-C0F9522545B3}</ProjectGuid>
+    <ProjectGuid>{DB3EE80D-6FE5-4064-8811-B969A2A81F82}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Plugin</RootNamespace>
-    <AssemblyName>Plugin</AssemblyName>
+    <RootNamespace>Hello_World_Plugin</RootNamespace>
+    <AssemblyName>Hello World Plugin</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -70,7 +70,7 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>del /q "D:\SteamLibrary\steamapps\common\PlateUp\PlateUp\BepInEx\plugins\Plugin.dll"
+    <PostBuildEvent>del /q "D:\SteamLibrary\steamapps\common\PlateUp\PlateUp\BepInEx\plugins\Hello World Plugin.dll"
 copy  "$(TargetPath)" "D:\SteamLibrary\steamapps\common\PlateUp\PlateUp\BepInEx\plugins\$(TargetFileName)"</PostBuildEvent>
   </PropertyGroup>
 </Project>

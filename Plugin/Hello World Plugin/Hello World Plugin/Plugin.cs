@@ -12,7 +12,7 @@ namespace Plugin
     {
         void Awake()
         {
-            Logger.LogInfo("Hello World"); //log print
+            Logger.LogInfo("Hello World!"); //log print
         }
     }
 }
