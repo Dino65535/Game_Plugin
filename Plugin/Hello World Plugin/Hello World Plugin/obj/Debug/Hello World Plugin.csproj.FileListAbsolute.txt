@@ -4,3 +4,9 @@ D:\User Desktop\Game_Plugin\Plugin\Hello World Plugin\Hello World Plugin\obj\Deb
 D:\User Desktop\Game_Plugin\Plugin\Hello World Plugin\Hello World Plugin\obj\Debug\Hello World Plugin.csproj.CoreCompileInputs.cache
 D:\User Desktop\Game_Plugin\Plugin\Hello World Plugin\Hello World Plugin\obj\Debug\Hello World Plugin.dll
 D:\User Desktop\Game_Plugin\Plugin\Hello World Plugin\Hello World Plugin\obj\Debug\Hello World Plugin.pdb
+D:\User Desktop\git\Game_Plugin\Plugin\Hello World Plugin\Hello World Plugin\bin\Debug\Hello World Plugin.dll
+D:\User Desktop\git\Game_Plugin\Plugin\Hello World Plugin\Hello World Plugin\bin\Debug\Hello World Plugin.pdb
+D:\User Desktop\git\Game_Plugin\Plugin\Hello World Plugin\Hello World Plugin\obj\Debug\Hello World Plugin.csproj.AssemblyReference.cache
+D:\User Desktop\git\Game_Plugin\Plugin\Hello World Plugin\Hello World Plugin\obj\Debug\Hello World Plugin.csproj.CoreCompileInputs.cache
+D:\User Desktop\git\Game_Plugin\Plugin\Hello World Plugin\Hello World Plugin\obj\Debug\Hello World Plugin.dll
+D:\User Desktop\git\Game_Plugin\Plugin\Hello World Plugin\Hello World Plugin\obj\Debug\Hello World Plugin.pdb

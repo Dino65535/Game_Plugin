@@ -32,15 +32,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="0Harmony20">
-      <HintPath>..\..\..\..\..\SteamLibrary\steamapps\common\PlateUp\PlateUp\BepInEx\core\0Harmony20.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\SteamLibrary\steamapps\common\PlateUp\PlateUp\BepInEx\core\0Harmony20.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Assembly-CSharp">
-      <HintPath>..\..\..\..\..\SteamLibrary\steamapps\common\PlateUp\PlateUp\PlateUp_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\SteamLibrary\steamapps\common\PlateUp\PlateUp\PlateUp_Data\Managed\Assembly-CSharp.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="BepInEx">
-      <HintPath>..\..\..\..\..\SteamLibrary\steamapps\common\PlateUp\PlateUp\BepInEx\core\BepInEx.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\SteamLibrary\steamapps\common\PlateUp\PlateUp\BepInEx\core\BepInEx.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="System" />
@@ -52,15 +52,15 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="UnityEngine">
-      <HintPath>..\..\..\..\..\SteamLibrary\steamapps\common\PlateUp\PlateUp\PlateUp_Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\SteamLibrary\steamapps\common\PlateUp\PlateUp\PlateUp_Data\Managed\UnityEngine.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.CoreModule">
-      <HintPath>..\..\..\..\..\SteamLibrary\steamapps\common\PlateUp\PlateUp\PlateUp_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\SteamLibrary\steamapps\common\PlateUp\PlateUp\PlateUp_Data\Managed\UnityEngine.CoreModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="UnityEngine.IMGUIModule">
-      <HintPath>..\..\..\..\..\SteamLibrary\steamapps\common\PlateUp\PlateUp\PlateUp_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\SteamLibrary\steamapps\common\PlateUp\PlateUp\PlateUp_Data\Managed\UnityEngine.IMGUIModule.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>
