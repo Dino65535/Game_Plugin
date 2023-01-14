@@ -10,6 +10,8 @@ using Kitchen.Modules;
 using UnityEngine;
 using System.Reflection;
 using KitchenLib;
+using KitchenLib.Event;
+
 
 namespace Plugin
 {
@@ -38,6 +40,28 @@ namespace Plugin
             Logger.LogInfo("int " + intConfig.Value);
             Logger.LogInfo("string " + stringConfig.Value);
         }*/
+
+        private void initMainMenu()
+        {
+            //Events.PreferenceMenu_MainMenu_SetupEvent = ;
+
+            Events.PreferenceMenu_PauseMenu_CreateSubmenusEvent += (s, args) => {
+                args.Menus.Add(typeof(TestMenu<MainMenuAction>), null);
+            };
+            ModsPreferencesMenu<MainMenuAction>.RegisterMenu("TTTTTT Menu", typeof(TestMenu<MainMenuAction>), typeof(MainMenuAction));
+
+        }
+
+
+
+    }
+
+    internal class TestMenu<T> : KLMenu<T> 
+    {
+        public TestMenu(Transform container, ModuleList Module_list) : base(container, Module_list)
+        {
+
+        }
 
 
     }
