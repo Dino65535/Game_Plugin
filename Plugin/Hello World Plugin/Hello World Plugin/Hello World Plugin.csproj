@@ -51,6 +51,10 @@
       <HintPath>..\..\..\..\..\..\SteamLibrary\steamapps\workshop\content\1599600\2898069883\KitchenLib-Workshop.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="KitchenMode">
+      <HintPath>..\..\..\..\..\..\SteamLibrary\steamapps\common\PlateUp\PlateUp\PlateUp_Data\Managed\KitchenMode.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

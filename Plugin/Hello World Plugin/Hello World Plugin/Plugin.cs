@@ -11,21 +11,17 @@ using UnityEngine;
 using System.Reflection;
 using KitchenLib;
 using KitchenLib.Event;
-
+using System.ComponentModel;
+using Unity.Entities;
+using Unity.Collections;
 
 namespace Plugin
 {
-    //[BepInPlugin("Dino.first.plugin", "Test Plugin", "3.0")] //plugin描述  ID.名子.版本
-    [BepInProcess("PlateUp.exe")]
-    [BepInPlugin("Dino.test.plugin", "Test Plugin", "1.0.0")]
-    public class Plugin : BaseMod //繼承
+    //[BepInProcess("PlateUp.exe")]
+    //[BepInPlugin("Dino.test.plugin", "Test Plugin", "0.0.1")]
+    public class Plugin : BaseMod
     {
-        public Plugin() : base("Dino.test.plugin", "Test Plugin", "Dino", "1.0.0", ">=1.1.1", Assembly.GetExecutingAssembly()) { }
-
-        //protected override void OnFrameUpdate() { }
-
-        //protected override void OnInitialise() { }
-
+        public Plugin() : base("Dino.test.plugin", "Test Plugin", "Dino", "0.0.1", ">=0.0.0", Assembly.GetExecutingAssembly()) { }
         /*
         ConfigEntry<int> intConfig;
         ConfigEntry<string> stringConfig;
@@ -40,29 +36,70 @@ namespace Plugin
             Logger.LogInfo("int " + intConfig.Value);
             Logger.LogInfo("string " + stringConfig.Value);
         }*/
-
-        private void initMainMenu()
+        public static bool isRegistered = false;
+        public static List<int> PlayerLevel;
+        protected override void Initialise()
         {
-            //Events.PreferenceMenu_MainMenu_SetupEvent = ;
+            base.Initialise();
+            if (!isRegistered)
+            {
+                //Registering
+                Events.PreferenceMenu_PauseMenu_CreateSubmenusEvent += (s, args) => {
+                    args.Menus.Add(typeof(TestMenu<PauseMenuAction>), new TestMenu<PauseMenuAction>(args.Container, args.Module_list));
+                };
+                //Adding
+                ModsPreferencesMenu<PauseMenuAction>.RegisterMenu("Dino Pause Test Menu", typeof(TestMenu<PauseMenuAction>), typeof(PauseMenuAction));
 
-            Events.PreferenceMenu_PauseMenu_CreateSubmenusEvent += (s, args) => {
-                args.Menus.Add(typeof(TestMenu<MainMenuAction>), null);
-            };
-            ModsPreferencesMenu<MainMenuAction>.RegisterMenu("TTTTTT Menu", typeof(TestMenu<MainMenuAction>), typeof(MainMenuAction));
 
+                //Registering
+                Events.PreferenceMenu_MainMenu_CreateSubmenusEvent += (s, args) =>
+                {
+                    args.Menus.Add(typeof(TestMenu<MainMenuAction>), new TestMenu<MainMenuAction>(args.Container, args.Module_list));
+                };
+                //Adding
+                ModsPreferencesMenu<MainMenuAction>.RegisterMenu("Dino Main Test Menu", typeof(TestMenu<MainMenuAction>), typeof(MainMenuAction));
+
+                isRegistered = true;
+            }
+
+            /*Events.PreferenceMenu_PauseMenu_CreateSubmenusEvent += (s, args) => {
+                args.Menus.Add(typeof(TestMenu<MainMenuAction>), new TestMenu<MainMenuAction>(args.Container, args.Module_list));
+                args.Menus.Add(typeof(TestMenu<PauseMenuAction>), new TestMenu<PauseMenuAction>(args.Container, args.Module_list));
+            };*/
         }
-
-
-
     }
 
-    internal class TestMenu<T> : KLMenu<T> 
+    internal class TestMenu<T> : KLMenu<T>
     {
         public TestMenu(Transform container, ModuleList Module_list) : base(container, Module_list)
         {
 
         }
+        public override void Setup(int player_id)
+        {
+            AddLabel("Test AddLabel \n");
 
+            foreach(int num in Plugin.PlayerLevel)
+            {
+                AddLabel(num + " ");
+            }
+        }
 
     }
+
+    public class ChangeExp : GameSystemBase
+    {
+        private EntityQuery LevelQuery;
+
+        protected override void OnUpdate() { }
+
+        protected override void Initialise()
+        {
+            base.Initialise();
+
+            LevelQuery = base.GetEntityQuery(new ComponentType[] {typeof(SPlayerLevel) });
+            Plugin.PlayerLevel = (from item in LevelQuery.ToComponentDataArray<SPlayerLevel>(Allocator.Temp).ToList<SPlayerLevel>() select item.Level).ToList<int>();
+        }
+    }
+        
 }
