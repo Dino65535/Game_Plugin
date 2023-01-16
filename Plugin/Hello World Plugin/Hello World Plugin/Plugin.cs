@@ -14,6 +14,7 @@ using KitchenLib.Event;
 using System.ComponentModel;
 using Unity.Entities;
 using Unity.Collections;
+using JetBrains.Annotations;
 
 namespace Plugin
 {
@@ -21,7 +22,7 @@ namespace Plugin
     //[BepInPlugin("Dino.test.plugin", "Test Plugin", "0.0.1")]
     public class Plugin : BaseMod
     {
-        public Plugin() : base("Dino.test.plugin", "Test Plugin", "Dino", "0.0.1", ">=0.0.0", Assembly.GetExecutingAssembly()) { }
+        public Plugin() : base("Dino.test.plugin", "Test Plugin", "Dino", "0.0.7", ">=0.0.0", Assembly.GetExecutingAssembly()) { }
         /*
         ConfigEntry<int> intConfig;
         ConfigEntry<string> stringConfig;
@@ -37,10 +38,13 @@ namespace Plugin
             Logger.LogInfo("string " + stringConfig.Value);
         }*/
         public static bool isRegistered = false;
-        public static List<int> PlayerLevel;
+        public static int PlayerLevels;
+        public static int Level = 2;
+
         protected override void Initialise()
         {
             base.Initialise();
+
             if (!isRegistered)
             {
                 //Registering
@@ -60,8 +64,9 @@ namespace Plugin
                 ModsPreferencesMenu<MainMenuAction>.RegisterMenu("Dino Main Test Menu", typeof(TestMenu<MainMenuAction>), typeof(MainMenuAction));
 
                 isRegistered = true;
+                
             }
-
+            
             /*Events.PreferenceMenu_PauseMenu_CreateSubmenusEvent += (s, args) => {
                 args.Menus.Add(typeof(TestMenu<MainMenuAction>), new TestMenu<MainMenuAction>(args.Container, args.Module_list));
                 args.Menus.Add(typeof(TestMenu<PauseMenuAction>), new TestMenu<PauseMenuAction>(args.Container, args.Module_list));
@@ -73,33 +78,39 @@ namespace Plugin
     {
         public TestMenu(Transform container, ModuleList Module_list) : base(container, Module_list)
         {
-
+            
         }
         public override void Setup(int player_id)
-        {
-            AddLabel("Test AddLabel \n");
+        {       
+            AddLabel("player level is : " + Plugin.Level);
 
-            foreach(int num in Plugin.PlayerLevel)
+            New<SpacerElement>(true);//end line
+            New<SpacerElement>(true);
+            
+            AddButton("Back to Menu", delegate
             {
-                AddLabel(num + " ");
-            }
+                base.RequestPreviousMenu();
+            }, 0, 1f, 0.2f);
         }
 
     }
 
     public class ChangeExp : GameSystemBase
     {
-        private EntityQuery LevelQuery;
-
-        protected override void OnUpdate() { }
-
+        private EntityQuery PlayerLevelsQuery;
+        private SPlayerLevel player;
         protected override void Initialise()
         {
+            Debug.LogWarning("Work!!!");
             base.Initialise();
-
-            LevelQuery = base.GetEntityQuery(new ComponentType[] {typeof(SPlayerLevel) });
-            Plugin.PlayerLevel = (from item in LevelQuery.ToComponentDataArray<SPlayerLevel>(Allocator.Temp).ToList<SPlayerLevel>() select item.Level).ToList<int>();
         }
+
+        protected override void OnUpdate() 
+        {
+            PlayerLevelsQuery = base.GetEntityQuery(new ComponentType[] { typeof(SPlayerLevel) });
+            player = PlayerLevelsQuery.GetSingleton<SPlayerLevel>();
+            Plugin.Level = player.Level;
+            Debug.LogWarning("Work!!!!!!!!!!!!!!!!");
+        } 
     }
-        
 }
