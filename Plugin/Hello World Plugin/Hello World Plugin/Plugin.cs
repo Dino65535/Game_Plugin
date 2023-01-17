@@ -22,7 +22,7 @@ namespace Plugin
     //[BepInPlugin("Dino.test.plugin", "Test Plugin", "0.0.1")]
     public class Plugin : BaseMod
     {
-        public Plugin() : base("Dino.test.plugin", "Test Plugin", "Dino", "0.0.7", ">=0.0.0", Assembly.GetExecutingAssembly()) { }
+        public Plugin() : base("Dino.test.plugin", "Test Plugin", "Dino", "0.0.8", ">=0.0.0", Assembly.GetExecutingAssembly()) { }
         /*
         ConfigEntry<int> intConfig;
         ConfigEntry<string> stringConfig;
@@ -41,9 +41,11 @@ namespace Plugin
         public static int PlayerLevels;
         public static int Level = 2;
 
+        
         protected override void Initialise()
         {
             base.Initialise();
+
 
             if (!isRegistered)
             {
@@ -64,14 +66,20 @@ namespace Plugin
                 ModsPreferencesMenu<MainMenuAction>.RegisterMenu("Dino Main Test Menu", typeof(TestMenu<MainMenuAction>), typeof(MainMenuAction));
 
                 isRegistered = true;
-                
+                Debug.LogWarning("register");
+                return;
             }
-            
+            Debug.LogWarning("skipping re-creating menus");
             /*Events.PreferenceMenu_PauseMenu_CreateSubmenusEvent += (s, args) => {
                 args.Menus.Add(typeof(TestMenu<MainMenuAction>), new TestMenu<MainMenuAction>(args.Container, args.Module_list));
                 args.Menus.Add(typeof(TestMenu<PauseMenuAction>), new TestMenu<PauseMenuAction>(args.Container, args.Module_list));
             };*/
         }
+        protected override void OnUpdate()
+        {
+            //every frame call  
+        }   
+
     }
 
     internal class TestMenu<T> : KLMenu<T>
@@ -83,7 +91,7 @@ namespace Plugin
         public override void Setup(int player_id)
         {       
             AddLabel("player level is : " + Plugin.Level);
-
+            
             New<SpacerElement>(true);//end line
             New<SpacerElement>(true);
             
@@ -100,14 +108,15 @@ namespace Plugin
         private EntityQuery PlayerLevelsQuery;
         private SPlayerLevel player;
         protected override void Initialise()
-        {
-            Debug.LogWarning("Work!!!");
+        {    
             base.Initialise();
-        }
+            PlayerLevelsQuery = base.GetEntityQuery(new ComponentType[] { typeof(SPlayerLevel) });
+            Debug.LogWarning("Work");
+            OnUpdate();
+        }   
 
         protected override void OnUpdate() 
-        {
-            PlayerLevelsQuery = base.GetEntityQuery(new ComponentType[] { typeof(SPlayerLevel) });
+        {    
             player = PlayerLevelsQuery.GetSingleton<SPlayerLevel>();
             Plugin.Level = player.Level;
             Debug.LogWarning("Work!!!!!!!!!!!!!!!!");
